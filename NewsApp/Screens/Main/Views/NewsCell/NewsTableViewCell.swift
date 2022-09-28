@@ -8,6 +8,13 @@
 import UIKit
 import SnapKit
 
+private enum Constants {
+    static let titleLabelFont: UIFont = FontFamily.Montserrat.bold.font(size: 16)
+    static let descriptionLabelFont: UIFont = FontFamily.Montserrat.regular.font(size: 12)
+    
+    static let imageSize: CGFloat = 108
+}
+
 final class NewsTableViewCell: UITableViewCell {
     
     // Public property
@@ -18,12 +25,16 @@ final class NewsTableViewCell: UITableViewCell {
     // UI
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        
+        label.numberOfLines = 2
+        label.font = Constants.titleLabelFont
+        label.textColor = Asset.mainBackgroundColor.color
         return label
     }()
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 0
+        label.numberOfLines = 3
+        label.textColor = Asset.mainDescriptionColor.color
+        label.font = Constants.descriptionLabelFont
         return label
     }()
     private lazy var newsImageView = UIImageView()
@@ -49,18 +60,17 @@ final class NewsTableViewCell: UITableViewCell {
     
     private func configureLayout() {
         titleLabel.snp.makeConstraints {
-            $0.leading.top.equalToSuperview()
-            $0.trailing.equalTo(newsImageView.snp.leading).offset(8)
-            $0.bottom.equalTo(descriptionLabel.snp.top)
+            $0.leading.top.equalToSuperview().offset(CGFloat.smallMargin)
         }
         descriptionLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview()
-            $0.trailing.equalTo(newsImageView.snp.leading).inset(500)
-            $0.top.equalTo(titleLabel.snp.bottom)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(CGFloat.smallMargin)
+            $0.leading.equalToSuperview().offset(CGFloat.smallMargin)
         }
         newsImageView.snp.makeConstraints {
-            $0.trailing.top.bottom.equalToSuperview()
-            $0.height.width.equalTo(100)
+            $0.height.width.equalTo(Constants.imageSize)
+            $0.trailing.equalToSuperview()
+            $0.leading.equalTo(titleLabel.snp.trailing).offset(CGFloat.smallMargin)
+            $0.leading.equalTo(descriptionLabel.snp.trailing).offset(CGFloat.smallMargin)
         }
     }
     

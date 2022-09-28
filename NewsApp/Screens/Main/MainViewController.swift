@@ -10,6 +10,7 @@ import SnapKit
 
 private enum Constants {
     static let headerHeight: CGFloat = 44
+    static let rowHeight: CGFloat = 108
     
     static let image: UIImage = Asset.armenia.image
 }
@@ -21,7 +22,7 @@ final class MainViewController: BaseViewController {
     private lazy var tableView = UITableView()
     
     private let models: [NewsTableViewCell.Model] = [
-        NewsTableViewCell.Model(title: "dadasdasdasdasd", description: "hdhasgdhashjdjhdsjhjsdgdhasgdahdghsh", image: Constants.image),
+        NewsTableViewCell.Model(title: "dadasdasdasdasdssbdsbdansdbnsbnabdnasbdnasdbsndbdnasbanbsanbdansdbasnd", description: "hdhasgdhashjdjhdsjhjsdgdhasgdajhjdsjhdajdhsaajsdhjadasdasdsadhasjdhjasdjadshajdhskjdahdjkashdjaksdhsdjasdhajsdjashjasdjashsadhdghsh", image: Constants.image),
         NewsTableViewCell.Model(title: "dadasdasdasdasd", description: "hdhasghdshsdhdhasgdhasgdahdghsh", image: Constants.image),
         NewsTableViewCell.Model(title: "dadasdasdasdasd", description: "hdhasdsdgdhasgdhasgdahdghsh", image: Constants.image),
         NewsTableViewCell.Model(title: "dadasdasdasdasd", description: "hdhasssdsdshshjdhjsdhsjdsdsgdhasgdhasgdahdghsh", image: Constants.image),
@@ -73,8 +74,7 @@ final class MainViewController: BaseViewController {
         tableView.dataSource = self
         tableView.delaysContentTouches = false
         tableView.register(NewsTableViewCell.self, forCellReuseIdentifier: NewsTableViewCell.identifier)
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 50
+        tableView.rowHeight = Constants.rowHeight
     }
 }
 
