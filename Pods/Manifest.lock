@@ -1,0 +1,24 @@
+PODS:
+  - SnapKit (5.6.0)
+  - SwiftGen (6.6.2)
+  - Toast-Swift (5.0.1)
+
+DEPENDENCIES:
+  - SnapKit
+  - SwiftGen
+  - Toast-Swift
+
+SPEC REPOS:
+  trunk:
+    - SnapKit
+    - SwiftGen
+    - Toast-Swift
+
+SPEC CHECKSUMS:
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  SwiftGen: 1366a7f71aeef49954ca5a63ba4bef6b0f24138c
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
+
+PODFILE CHECKSUM: bcea8134e8ae980d078e34aa38e1009985a00066
+
+COCOAPODS: 1.11.3
