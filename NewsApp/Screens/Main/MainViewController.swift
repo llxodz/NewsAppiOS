@@ -23,15 +23,6 @@ final class MainViewController: BaseViewController {
     
     private var viewModel: MainViewModel?
     
-    private let models: [NewsTableViewCell.Model] = [
-        NewsTableViewCell.Model(title: "dadasdasdasdasdssbdsbdansdbnsbnabdnasbdnasdbsndbdnasbanbsanbdansdbasnd", description: "hdhasgdhashjdjhdsjhjsdgdhasgdajhjdsjhdajdhsaajsdhjadasdasdsadhasjdhjasdjadshajdhskjdahdjkashdjaksdhsdjasdhajsdjashjasdjashsadhdghsh", image: Constants.image),
-        NewsTableViewCell.Model(title: "dadasdasdasdasd", description: "hdhasghdshsdhdhasgdhasgdahdghsh", image: Constants.image),
-        NewsTableViewCell.Model(title: "dadasdasdasdasd", description: "hdhasdsdgdhasgdhasgdahdghsh", image: Constants.image),
-        NewsTableViewCell.Model(title: "dadasdasdasdasd", description: "hdhasssdsdshshjdhjsdhsjdsdsgdhasgdhasgdahdghsh", image: Constants.image),
-        NewsTableViewCell.Model(title: "dadasdasdasdasd", description: "hdhasgdhasgdhasgdsdjhsdhjjhsdhsdjahdghsh", image: Constants.image),
-        NewsTableViewCell.Model(title: "dadasdasdasdasd", description: "hdhasgdhasgdhahhjjhjhsgdahdghsh", image: Constants.image)
-    ]
-    
     // MARK: - Lifecycle
     
     override func loadView() {
@@ -103,9 +94,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: NewsTableViewCell.identifier,
             for: indexPath
-        ) as? NewsTableViewCell, let news = viewModel?.getNews() else { return UITableViewCell() }
-        print(news)
-        cell.configure(with: news[indexPath.row])
+        ) as? NewsTableViewCell else { return UITableViewCell() }
+        let cellViewModel = viewModel?.getViewModelCell(forIndexPath: indexPath)
+        cell.viewModel = cellViewModel
         
         return cell
     }

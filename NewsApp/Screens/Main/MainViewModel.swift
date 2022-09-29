@@ -30,4 +30,9 @@ class MainViewModel {
     func getNews() -> [ArticleEntity]? {
         return self.news
     }
+    
+    func getViewModelCell(forIndexPath: IndexPath) -> NewsCellViewModel? {
+        let news = news?[forIndexPath.row]
+        return NewsCellViewModel(news: news)
+    }
 }

@@ -23,6 +23,7 @@
 		3393CA1F28E4AAEB00C1F404 /* IB-Scenes+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3393CA1A28E4AAEB00C1F404 /* IB-Scenes+Generated.swift */; };
 		3393CA2028E4AAEB00C1F404 /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3393CA1B28E4AAEB00C1F404 /* Strings+Generated.swift */; };
 		3393CA2228E4AB5C00C1F404 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3393CA2128E4AB5C00C1F404 /* .gitignore */; };
+		33949B5128E65C89001890A5 /* NewsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33949B5028E65C89001890A5 /* NewsCellViewModel.swift */; };
 		339C7D2E28E4AF5B00EA795E /* HeaderMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339C7D2D28E4AF5B00EA795E /* HeaderMainView.swift */; };
 		339C7D3528E4B16600EA795E /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 339C7D3128E4B16600EA795E /* Montserrat-Medium.ttf */; };
 		339C7D3628E4B16600EA795E /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 339C7D3228E4B16600EA795E /* Montserrat-Bold.ttf */; };
@@ -81,6 +82,7 @@
 		3393CA1A28E4AAEB00C1F404 /* IB-Scenes+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IB-Scenes+Generated.swift"; sourceTree = "<group>"; };
 		3393CA1B28E4AAEB00C1F404 /* Strings+Generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
 		3393CA2128E4AB5C00C1F404 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		33949B5028E65C89001890A5 /* NewsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCellViewModel.swift; sourceTree = "<group>"; };
 		339C7D2D28E4AF5B00EA795E /* HeaderMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMainView.swift; sourceTree = "<group>"; };
 		339C7D3128E4B16600EA795E /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Medium.ttf"; path = "../../../../../../Downloads/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		339C7D3228E4B16600EA795E /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.ttf"; path = "../../../../../../Downloads/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				339C7D4628E4B80500EA795E /* NewsTableViewCell.swift */,
+				33949B5028E65C89001890A5 /* NewsCellViewModel.swift */,
 			);
 			path = NewsCell;
 			sourceTree = "<group>";
@@ -659,6 +662,7 @@
 				3393C9C828E49A4100C1F404 /* SceneDelegate.swift in Sources */,
 				339C7D4728E4B80500EA795E /* NewsTableViewCell.swift in Sources */,
 				3393CA1F28E4AAEB00C1F404 /* IB-Scenes+Generated.swift in Sources */,
+				33949B5128E65C89001890A5 /* NewsCellViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -22,6 +22,19 @@ final class NewsTableViewCell: UITableViewCell {
         String(describing: self)
     }
     
+    weak var viewModel: NewsCellViewModel? {
+        didSet {
+            titleLabel.text = viewModel?.getTitle()
+            descriptionLabel.text = viewModel?.getDescription()
+            AppNetworkManager.shared.getImageFromNews(url: viewModel?.getImageURL()) { image in
+                DispatchQueue.main.async {
+                    guard let image = image else { return }
+                    self.newsImageView.image = image
+                }
+            }
+        }
+    }
+    
     // UI
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -45,7 +58,6 @@ final class NewsTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addViews()
         configureLayout()
-        configureAppearance()
     }
     
     required init?(coder: NSCoder) {
@@ -72,37 +84,5 @@ final class NewsTableViewCell: UITableViewCell {
             $0.leading.equalTo(titleLabel.snp.trailing).offset(CGFloat.smallMargin)
             $0.leading.equalTo(descriptionLabel.snp.trailing).offset(CGFloat.smallMargin)
         }
-    }
-    
-    private func configureAppearance() {
-        
-    }
-}
-
-extension NewsTableViewCell: Configurable {
-
-    struct Model {
-        let title: String
-        let description: String
-        let image: UIImage
-    }
-
-    func configure<T>(with model: T) {
-        guard let news = model as? ArticleEntity else { return }
-        
-        titleLabel.text = news.title
-        descriptionLabel.text = news.description
-        configureImage(image: news.urlToImage)
-    }
-    
-    private func configureImage(image: String?) {
-        let url = URL(string: image ?? "")
-        guard let url = url else { return }
-        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
-            guard let data = data, error == nil else { return }
-            DispatchQueue.main.async {
-                self?.newsImageView.image = UIImage(data: data)
-            }
-        }.resume()
     }
 }
