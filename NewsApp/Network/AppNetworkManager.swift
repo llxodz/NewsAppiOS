@@ -7,7 +7,7 @@
 
 import UIKit
 
-private struct Constants {
+private enum Constants {
     static let baseURL = "https://newsapi.org/v2"
     static let method = "top-headlines"
     static let apiKey: String = {

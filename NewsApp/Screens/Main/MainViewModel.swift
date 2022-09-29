@@ -8,15 +8,26 @@
 import UIKit
 
 class MainViewModel {
+    
+    private var news: [ArticleEntity]?
      
-    func getNews() -> [ArticleEntity]? {
+    func fetchNews(complition: @escaping () -> Void) {
         AppNetworkManager.shared.getTopHeadlines { [weak self] result in
             switch result {
                 case .success(let result):
-                    
+                    self?.news = result
+                    complition()
                 case .failure(let error):
                     print(error)
             }
         }
+    }
+    
+    func numberOfRowsInSection(section: Int) -> Int? {
+        return news?.count ?? 0
+    }
+    
+    func getNews() -> [ArticleEntity]? {
+        return self.news
     }
 }

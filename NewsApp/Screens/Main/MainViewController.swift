@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-private struct Constants {
+private enum Constants {
     static let headerHeight: CGFloat = 44
     static let rowHeight: CGFloat = 108
     
@@ -46,8 +46,7 @@ final class MainViewController: BaseViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        viewModel = MainViewModel()
-        print(viewModel?.getNews())
+        configureViewModel()
     }
     
     // MARK: - Private
@@ -81,6 +80,15 @@ final class MainViewController: BaseViewController {
         tableView.register(NewsTableViewCell.self, forCellReuseIdentifier: NewsTableViewCell.identifier)
         tableView.rowHeight = Constants.rowHeight
     }
+    
+    private func configureViewModel() {
+        viewModel = MainViewModel()
+        viewModel?.fetchNews {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
 }
 
 // MARK: - Extensions UITableView
@@ -88,15 +96,16 @@ final class MainViewController: BaseViewController {
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        models.count
+        self.viewModel?.numberOfRowsInSection(section: section) ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: NewsTableViewCell.identifier,
             for: indexPath
-        ) as? NewsTableViewCell else { return UITableViewCell() }
-        cell.configure(with: models[indexPath.row])
+        ) as? NewsTableViewCell, let news = viewModel?.getNews() else { return UITableViewCell() }
+        print(news)
+        cell.configure(with: news[indexPath.row])
         
         return cell
     }

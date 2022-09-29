@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-private struct Constants {
+private enum Constants {
     static let titleFont: UIFont = FontFamily.Montserrat.medium.font(size: 16)
     static let separatorHeight: CGFloat = 0.5
 }

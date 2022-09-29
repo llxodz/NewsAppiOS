@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-private struct Constants {
+private enum Constants {
     static let titleLabelFont: UIFont = FontFamily.Montserrat.bold.font(size: 16)
     static let descriptionLabelFont: UIFont = FontFamily.Montserrat.regular.font(size: 12)
     
@@ -87,9 +87,22 @@ extension NewsTableViewCell: Configurable {
         let image: UIImage
     }
 
-    func configure(with model: Model) {
-        titleLabel.text = model.title
-        descriptionLabel.text = model.description
-        newsImageView.image = model.image
+    func configure<T>(with model: T) {
+        guard let news = model as? ArticleEntity else { return }
+        
+        titleLabel.text = news.title
+        descriptionLabel.text = news.description
+        configureImage(image: news.urlToImage)
+    }
+    
+    private func configureImage(image: String?) {
+        let url = URL(string: image ?? "")
+        guard let url = url else { return }
+        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+            guard let data = data, error == nil else { return }
+            DispatchQueue.main.async {
+                self?.newsImageView.image = UIImage(data: data)
+            }
+        }.resume()
     }
 }
