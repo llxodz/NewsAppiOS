@@ -1,0 +1,53 @@
+//
+//  AppNetworkManager.swift
+//  NewsApp
+//
+//  Created by Ilya Gavrilov on 30.09.2022.
+//
+
+import UIKit
+
+private struct Constants {
+    static let baseURL = "https://newsapi.org/v2"
+    static let method = "top-headlines"
+    static let apiKey: String = {
+        guard let apiKey = Bundle.main.infoDictionary?["apiKey"] as? String else { return "0x0003" }
+        return apiKey
+    }()
+}
+
+final class AppNetworkManager {
+    
+    static var shared = AppNetworkManager()
+    
+    private init() {}
+    
+    fileprivate func getBaseUrl(baseUrl: String, method: String, apiKey: String, country: String) -> String {
+        return "\(baseUrl)/\(method)?country=\(country)&apiKey=\(apiKey)"
+    }
+    
+    public func getTopHeadlines(comlition: @escaping (Result<[ArticleEntity], Error>) -> Void) {
+        guard let url = URL(string: getBaseUrl(baseUrl: Constants.baseURL,
+                                               method: Constants.method,
+                                               apiKey: Constants.apiKey,
+                                               country: "ru"))
+        else { return }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, _, error in
+            if let error = error {
+                comlition(.failure(error))
+            }
+            else if let data = data {
+                do {
+                    let result = try JSONDecoder().decode(ArticleResponse.self, from: data)
+                    comlition(.success(result.articles))
+                }
+                catch {
+                    comlition(.failure(error))
+                }
+            }
+        }
+        
+        task.resume()
+    }
+}

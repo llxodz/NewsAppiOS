@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-private enum Constants {
+private struct Constants {
     static let headerHeight: CGFloat = 44
     static let rowHeight: CGFloat = 108
     
@@ -20,6 +20,8 @@ final class MainViewController: BaseViewController {
     // UI
     private lazy var headerView = HeaderMainView()
     private lazy var tableView = UITableView()
+    
+    private var viewModel: MainViewModel?
     
     private let models: [NewsTableViewCell.Model] = [
         NewsTableViewCell.Model(title: "dadasdasdasdasdssbdsbdansdbnsbnabdnasbdnasdbsndbdnasbanbsanbdansdbasnd", description: "hdhasgdhashjdjhdsjhjsdgdhasgdajhjdsjhdajdhsaajsdhjadasdasdsadhasjdhjasdjadshajdhskjdahdjkashdjaksdhsdjasdhajsdjashjasdjashsadhdghsh", image: Constants.image),
@@ -43,6 +45,9 @@ final class MainViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
+        viewModel = MainViewModel()
+        print(viewModel?.getNews())
     }
     
     // MARK: - Private

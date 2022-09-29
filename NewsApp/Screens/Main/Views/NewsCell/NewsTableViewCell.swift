@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-private enum Constants {
+private struct Constants {
     static let titleLabelFont: UIFont = FontFamily.Montserrat.bold.font(size: 16)
     static let descriptionLabelFont: UIFont = FontFamily.Montserrat.regular.font(size: 12)
     
