@@ -26,7 +26,7 @@ final class AppNetworkManager {
         return "\(baseUrl)/\(method)?country=\(country)&apiKey=\(apiKey)"
     }
     
-    // Get all news
+    /// Get all news
     public func getTopHeadlines(comlition: @escaping (Result<[ArticleEntity], Error>) -> Void) {
         guard let url = URL(string: getBaseUrl(baseUrl: Constants.baseURL,
                                                method: Constants.method,
@@ -52,7 +52,7 @@ final class AppNetworkManager {
         task.resume()
     }
     
-    // Get image in news
+    /// Get image in news
     public func getImageFromNews(url: String?, complition: @escaping (_ image: UIImage?) -> Void) {
         guard let url = URL(string: url ?? "") else { return }
         

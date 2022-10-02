@@ -10,9 +10,7 @@ import SnapKit
 
 private enum Constants {
     static let headerHeight: CGFloat = 44
-    static let rowHeight: CGFloat = 108
-    
-    static let image: UIImage = Asset.armenia.image
+    static let rowHeight: CGFloat = 124
 }
 
 final class MainViewController: BaseViewController {

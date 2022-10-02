@@ -13,6 +13,7 @@ private enum Constants {
     static let descriptionLabelFont: UIFont = FontFamily.Montserrat.regular.font(size: 12)
     
     static let imageSize: CGFloat = 108
+    static let numbersOfLines: Int = 4
 }
 
 final class NewsTableViewCell: UITableViewCell {
@@ -38,19 +39,24 @@ final class NewsTableViewCell: UITableViewCell {
     // UI
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 2
+        label.numberOfLines = Constants.numbersOfLines / 2
         label.font = Constants.titleLabelFont
         label.textColor = Asset.mainBackgroundColor.color
         return label
     }()
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 3
+        label.numberOfLines = Constants.numbersOfLines
         label.textColor = Asset.mainDescriptionColor.color
         label.font = Constants.descriptionLabelFont
         return label
     }()
-    private lazy var newsImageView = UIImageView()
+    private lazy var newsImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = CGFloat.compactRadius
+        return imageView
+    }()
     
     // MARK: - Lifecycle
     
@@ -80,7 +86,8 @@ final class NewsTableViewCell: UITableViewCell {
         }
         newsImageView.snp.makeConstraints {
             $0.height.width.equalTo(Constants.imageSize)
-            $0.trailing.equalToSuperview()
+            $0.trailing.equalTo(self.snp.trailing).inset(CGFloat.smallMargin)
+            $0.centerY.equalTo(self.snp.centerY).inset(CGFloat.smallMargin)
             $0.leading.equalTo(titleLabel.snp.trailing).offset(CGFloat.smallMargin)
             $0.leading.equalTo(descriptionLabel.snp.trailing).offset(CGFloat.smallMargin)
         }
