@@ -8,6 +8,14 @@
 import UIKit
 import SnapKit
 
+private enum Constants {
+    static let titleLabelFont: UIFont = FontFamily.Montserrat.bold.font(size: 16)
+    static let descriptionLabelFont: UIFont = FontFamily.Montserrat.regular.font(size: 12)
+    
+    static let imageSize: CGFloat = 108
+    static let numbersOfLines: Int = 4
+}
+
 final class NewsTableViewCell: UITableViewCell {
     
     // Public property
@@ -15,18 +23,40 @@ final class NewsTableViewCell: UITableViewCell {
         String(describing: self)
     }
     
+    weak var viewModel: NewsCellViewModel? {
+        didSet {
+            titleLabel.text = viewModel?.getTitle()
+            descriptionLabel.text = viewModel?.getDescription()
+            AppNetworkManager.shared.getImageFromNews(url: viewModel?.getImageURL()) { image in
+                DispatchQueue.main.async {
+                    guard let image = image else { return }
+                    self.newsImageView.image = image
+                }
+            }
+        }
+    }
+    
     // UI
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        
+        label.numberOfLines = Constants.numbersOfLines / 2
+        label.font = Constants.titleLabelFont
+        label.textColor = Asset.mainBackgroundColor.color
         return label
     }()
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 0
+        label.numberOfLines = Constants.numbersOfLines
+        label.textColor = Asset.mainDescriptionColor.color
+        label.font = Constants.descriptionLabelFont
         return label
     }()
-    private lazy var newsImageView = UIImageView()
+    private lazy var newsImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = CGFloat.compactRadius
+        return imageView
+    }()
     
     // MARK: - Lifecycle
     
@@ -34,7 +64,6 @@ final class NewsTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addViews()
         configureLayout()
-        configureAppearance()
     }
     
     required init?(coder: NSCoder) {
@@ -49,37 +78,18 @@ final class NewsTableViewCell: UITableViewCell {
     
     private func configureLayout() {
         titleLabel.snp.makeConstraints {
-            $0.leading.top.equalToSuperview()
-            $0.trailing.equalTo(newsImageView.snp.leading).offset(8)
-            $0.bottom.equalTo(descriptionLabel.snp.top)
+            $0.leading.top.equalToSuperview().offset(CGFloat.smallMargin)
         }
         descriptionLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview()
-            $0.trailing.equalTo(newsImageView.snp.leading).inset(500)
-            $0.top.equalTo(titleLabel.snp.bottom)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(CGFloat.smallMargin)
+            $0.leading.equalToSuperview().offset(CGFloat.smallMargin)
         }
         newsImageView.snp.makeConstraints {
-            $0.trailing.top.bottom.equalToSuperview()
-            $0.height.width.equalTo(100)
+            $0.height.width.equalTo(Constants.imageSize)
+            $0.trailing.equalTo(self.snp.trailing).inset(CGFloat.smallMargin)
+            $0.centerY.equalTo(self.snp.centerY).inset(CGFloat.smallMargin)
+            $0.leading.equalTo(titleLabel.snp.trailing).offset(CGFloat.smallMargin)
+            $0.leading.equalTo(descriptionLabel.snp.trailing).offset(CGFloat.smallMargin)
         }
-    }
-    
-    private func configureAppearance() {
-        
-    }
-}
-
-extension NewsTableViewCell: Configurable {
-
-    struct Model {
-        let title: String
-        let description: String
-        let image: UIImage
-    }
-
-    func configure(with model: Model) {
-        titleLabel.text = model.title
-        descriptionLabel.text = model.description
-        newsImageView.image = model.image
     }
 }

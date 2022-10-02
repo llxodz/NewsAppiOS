@@ -11,5 +11,5 @@ public protocol Configurable: AnyObject {
     
     associatedtype Model
     
-    func configure(with model: Model)
+    func configure<T>(with model: T)
 }

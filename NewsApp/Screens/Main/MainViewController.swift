@@ -10,8 +10,7 @@ import SnapKit
 
 private enum Constants {
     static let headerHeight: CGFloat = 44
-    
-    static let image: UIImage = Asset.armenia.image
+    static let rowHeight: CGFloat = 124
 }
 
 final class MainViewController: BaseViewController {
@@ -20,14 +19,7 @@ final class MainViewController: BaseViewController {
     private lazy var headerView = HeaderMainView()
     private lazy var tableView = UITableView()
     
-    private let models: [NewsTableViewCell.Model] = [
-        NewsTableViewCell.Model(title: "dadasdasdasdasd", description: "hdhasgdhashjdjhdsjhjsdgdhasgdahdghsh", image: Constants.image),
-        NewsTableViewCell.Model(title: "dadasdasdasdasd", description: "hdhasghdshsdhdhasgdhasgdahdghsh", image: Constants.image),
-        NewsTableViewCell.Model(title: "dadasdasdasdasd", description: "hdhasdsdgdhasgdhasgdahdghsh", image: Constants.image),
-        NewsTableViewCell.Model(title: "dadasdasdasdasd", description: "hdhasssdsdshshjdhjsdhsjdsdsgdhasgdhasgdahdghsh", image: Constants.image),
-        NewsTableViewCell.Model(title: "dadasdasdasdasd", description: "hdhasgdhasgdhasgdsdjhsdhjjhsdhsdjahdghsh", image: Constants.image),
-        NewsTableViewCell.Model(title: "dadasdasdasdasd", description: "hdhasgdhasgdhahhjjhjhsgdahdghsh", image: Constants.image)
-    ]
+    private var viewModel: MainViewModel?
     
     // MARK: - Lifecycle
     
@@ -42,6 +34,8 @@ final class MainViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
+        configureViewModel()
     }
     
     // MARK: - Private
@@ -73,8 +67,16 @@ final class MainViewController: BaseViewController {
         tableView.dataSource = self
         tableView.delaysContentTouches = false
         tableView.register(NewsTableViewCell.self, forCellReuseIdentifier: NewsTableViewCell.identifier)
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 50
+        tableView.rowHeight = Constants.rowHeight
+    }
+    
+    private func configureViewModel() {
+        viewModel = MainViewModel()
+        viewModel?.fetchNews {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
 }
 
@@ -83,7 +85,7 @@ final class MainViewController: BaseViewController {
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        models.count
+        self.viewModel?.numberOfRowsInSection(section: section) ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -91,7 +93,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             withIdentifier: NewsTableViewCell.identifier,
             for: indexPath
         ) as? NewsTableViewCell else { return UITableViewCell() }
-        cell.configure(with: models[indexPath.row])
+        let cellViewModel = viewModel?.getViewModelCell(forIndexPath: indexPath)
+        cell.viewModel = cellViewModel
         
         return cell
     }
