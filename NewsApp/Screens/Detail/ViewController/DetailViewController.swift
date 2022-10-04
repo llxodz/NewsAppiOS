@@ -48,12 +48,12 @@ final class DetailViewController: BaseViewController {
         super.loadView()
         addViews()
         configureLayout()
+        configureAppearance()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        newsImage.backgroundColor = .red
     }
     
     // MARK: - Private
@@ -73,9 +73,16 @@ final class DetailViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview().inset(16)
         }
         descriptionNewsLabel.snp.makeConstraints {
-            $0.top.equalTo(titleNewsLabel.snp.bottom).offset(16)
+            $0.top.equalTo(titleNewsLabel.snp.bottom).offset(CGFloat.smallMargin)
             $0.leading.trailing.equalToSuperview().inset(16)
         }
+    }
+    
+    private func configureAppearance() {
+        self.navigationController?.isNavigationBarHidden = false
+        
+        newsImage.layer.masksToBounds = true
+        newsImage.layer.cornerRadius = CGFloat.baseRadius
     }
 }
 

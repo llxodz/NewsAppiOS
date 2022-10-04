@@ -28,7 +28,6 @@ final class MainViewController: BaseViewController {
         super.loadView()
         addSubviews()
         configureLayout()
-        configureAppearance()
         configureTableView()
     }
 
@@ -37,6 +36,11 @@ final class MainViewController: BaseViewController {
         view.backgroundColor = .white
         
         configureViewModel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     // MARK: - Private
@@ -57,13 +61,10 @@ final class MainViewController: BaseViewController {
         }
     }
     
-    private func configureAppearance() {
+    private func configureTableView() {
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0.001, height: 0))
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0.001, height: 0))
         tableView.separatorInset = UIEdgeInsets(top: 0, left: .baseMargin, bottom: 0, right: 0)
-    }
-    
-    private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.delaysContentTouches = false
