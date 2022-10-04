@@ -101,6 +101,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        coordinator?.showDetailViewController()
+        coordinator?.showDetailViewController(viewModel?.selectedRow(forIndexPath: indexPath))
     }
 }

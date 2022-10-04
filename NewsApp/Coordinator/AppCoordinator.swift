@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AppCoordinator: Coordinator {
+class AppCoordinator: BaseCoordinator {
     var navigationController: UINavigationController
     
     init(navigationController: UINavigationController) {
@@ -22,8 +22,10 @@ class AppCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func showDetailViewController() {
+    func showDetailViewController(_ viewModel: DetailViewModel?) {
         let vc = DetailViewController()
+        vc.coordinator = self
+        vc.viewModel = viewModel
         navigationController.navigationBar.isHidden = false
         navigationController.pushViewController(vc, animated: true)
     }

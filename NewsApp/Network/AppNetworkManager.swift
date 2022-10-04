@@ -14,6 +14,7 @@ private enum Constants {
         guard let apiKey = Bundle.main.infoDictionary?["apiKey"] as? String else { return "0x0003" }
         return apiKey
     }()
+    static let country = "ru"
 }
 
 final class AppNetworkManager {
@@ -31,7 +32,7 @@ final class AppNetworkManager {
         guard let url = URL(string: getBaseUrl(baseUrl: Constants.baseURL,
                                                method: Constants.method,
                                                apiKey: Constants.apiKey,
-                                               country: "ru"))
+                                               country: Constants.country))
         else { return }
         
         let task = URLSession.shared.dataTask(with: url) { data, _, error in

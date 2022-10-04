@@ -1,13 +1,13 @@
 //
-//  NewsCellViewModel.swift
+//  DetailViewModel.swift
 //  NewsApp
 //
-//  Created by Ilya Gavrilov on 30.09.2022.
+//  Created by Ilya Gavrilov on 04.10.2022.
 //
 
 import UIKit
 
-class NewsCellViewModel: NewsViewModelType {
+class DetailViewModel: NewsViewModelType {
     
     var news: ArticleEntity?
     

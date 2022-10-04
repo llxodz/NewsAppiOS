@@ -35,4 +35,9 @@ class MainViewModel {
         let news = news?[forIndexPath.row]
         return NewsCellViewModel(news: news)
     }
+    
+    func selectedRow(forIndexPath: IndexPath) -> DetailViewModel? {
+        let news = news?[forIndexPath.row]
+        return DetailViewModel(news: news)
+    }
 }

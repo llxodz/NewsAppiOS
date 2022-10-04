@@ -58,7 +58,7 @@ final class NewsTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    // MARK: - Lifecycle
+    // MARK: - Init
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

@@ -29,6 +29,8 @@ final class HeaderMainView: UIView {
         return view
     }()
     
+    // MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addViews()
