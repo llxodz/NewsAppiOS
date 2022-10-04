@@ -19,7 +19,8 @@ final class MainViewController: BaseViewController {
     private lazy var headerView = HeaderMainView()
     private lazy var tableView = UITableView()
     
-    private var viewModel: MainViewModel?
+    var viewModel: MainViewModel?
+    var coordinator: AppCoordinator?
     
     // MARK: - Lifecycle
     
@@ -71,7 +72,6 @@ final class MainViewController: BaseViewController {
     }
     
     private func configureViewModel() {
-        viewModel = MainViewModel()
         viewModel?.fetchNews {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -101,5 +101,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        coordinator?.showDetailViewController()
     }
 }
