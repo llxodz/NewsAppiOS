@@ -18,7 +18,7 @@ final class HeaderMainView: UIView {
     // UI
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = L10n.breakingsNews
+        label.text = L10n.breakingNews
         label.font = Constants.titleFont
         label.textColor = Asset.mainBackgroundColor.color
         return label

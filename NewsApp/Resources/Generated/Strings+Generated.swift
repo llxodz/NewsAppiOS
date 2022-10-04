@@ -11,7 +11,11 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
   /// Breaking News
-  internal static let breakingsNews = L10n.tr("Localizable", "BreakingsNews", fallback: "Breaking News")
+  internal static let breakingNews = L10n.tr("Localizable", "BreakingNews", fallback: "Breaking News")
+  internal enum Detail {
+    /// Share
+    internal static let shareButton = L10n.tr("Localizable", "Detail.ShareButton", fallback: "Share")
+  }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

@@ -2,8 +2,9 @@
   Localizable.strings
   NewsApp
 
-  Created by Ilya Gavrilov on 28.09.2022.
+  Created by Ilya Gavrilov on 04.10.2022.
   
 */
 
-BreakingsNews = "Breaking News";
+BreakingNews = "Breaking News";
+Detail.ShareButton = "Share";

@@ -34,4 +34,15 @@ class DetailViewModel {
             return "Автор не указан"
         }
     }
+    
+    func getTextToShare() -> String {
+        if let title = news?.title,
+           let description = self.news?.description,
+           let url = self.news?.url
+        {
+            return "\(title)\n\n\(description)\n\n\(getAuthorNews())\n\n\(url)"
+        } else {
+            return ""
+        }
+    }
 }
