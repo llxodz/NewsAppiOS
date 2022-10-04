@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 private enum Constants {
     static let titleFont: UIFont = FontFamily.Montserrat.bold.font(size: 16)
@@ -26,15 +27,12 @@ final class DetailViewController: BaseViewController {
     // Public property
     var viewModel: DetailViewModel? {
         didSet {
-            titleNewsLabel.text = viewModel?.getTitle()
-            descriptionNewsLabel.text = viewModel?.getDescription()
-            authorLabel.text = viewModel?.getAuthorNews()
-            AppNetworkManager.shared.getImageFromNews(url: viewModel?.getImageURL()) { image in
-                DispatchQueue.main.async {
-                    guard let image = image else { return }
-                    self.newsImage.image = image
-                }
-            }
+            guard let viewModel = viewModel else { return }
+            titleNewsLabel.text = viewModel.getTitle()
+            descriptionNewsLabel.text = viewModel.getDescription()
+            authorLabel.text = viewModel.getAuthorNews()
+            let url = URL(string: viewModel.getImageURL())
+            newsImage.kf.setImage(with: url)
         }
     }
     weak var coordinator: AppCoordinator?

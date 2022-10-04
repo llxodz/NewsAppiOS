@@ -52,16 +52,4 @@ final class AppNetworkManager {
         
         task.resume()
     }
-    
-    /// Get image in news
-    public func getImageFromNews(url: String?, complition: @escaping (_ image: UIImage?) -> Void) {
-        guard let url = URL(string: url ?? "") else { return }
-        
-        let task = URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data, error == nil else { return }
-            complition(UIImage(data: data))
-        }
-        
-        task.resume()
-    }
 }
