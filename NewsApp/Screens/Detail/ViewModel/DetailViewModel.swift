@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailViewModel: NewsViewModelType {
+class DetailViewModel {
     
     var news: ArticleEntity?
     
@@ -25,5 +25,13 @@ class DetailViewModel: NewsViewModelType {
     
     func getImageURL() -> String {
         return news?.urlToImage ?? ""
+    }
+    
+    func getAuthorNews() -> String {
+        if ((news?.author) != nil) {
+            return "Автор: \(news?.author ?? "")"
+        } else {
+            return "Автор не указан"
+        }
     }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NewsCellViewModel: NewsViewModelType {
+class NewsCellViewModel {
     
     var news: ArticleEntity?
     

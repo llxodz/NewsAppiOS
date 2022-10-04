@@ -15,6 +15,7 @@ final class DetailViewController: BaseViewController {
         didSet {
             titleNewsLabel.text = viewModel?.getTitle()
             descriptionNewsLabel.text = viewModel?.getDescription()
+            authorLabel.text = viewModel?.getAuthorNews()
             AppNetworkManager.shared.getImageFromNews(url: viewModel?.getImageURL()) { image in
                 DispatchQueue.main.async {
                     guard let image = image else { return }
@@ -41,6 +42,14 @@ final class DetailViewController: BaseViewController {
         label.font = FontFamily.Montserrat.medium.font(size: 14)
         return label
     }()
+    private lazy var authorLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = Asset.mainBackgroundColor.color
+        label.textAlignment = .right
+        label.numberOfLines = 0
+        label.font = FontFamily.Montserrat.regular.font(size: 16)
+        return label
+    }()
     
     // MARK: - Lifecycle
     
@@ -59,22 +68,26 @@ final class DetailViewController: BaseViewController {
     // MARK: - Private
     
     private func addViews() {
-        view.addSubviews(newsImage, titleNewsLabel, descriptionNewsLabel)
+        view.addSubviews(newsImage, titleNewsLabel, descriptionNewsLabel, authorLabel)
     }
     
     private func configureLayout() {
         newsImage.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.leading.trailing.equalToSuperview().inset(CGFloat.baseMargin)
             $0.height.equalTo(200)
         }
         titleNewsLabel.snp.makeConstraints {
-            $0.top.equalTo(newsImage.snp.bottom).offset(16)
-            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.top.equalTo(newsImage.snp.bottom).offset(CGFloat.baseMargin)
+            $0.leading.trailing.equalToSuperview().inset(CGFloat.baseMargin)
         }
         descriptionNewsLabel.snp.makeConstraints {
             $0.top.equalTo(titleNewsLabel.snp.bottom).offset(CGFloat.smallMargin)
-            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.leading.trailing.equalToSuperview().inset(CGFloat.baseMargin)
+        }
+        authorLabel.snp.makeConstraints {
+            $0.top.equalTo(descriptionNewsLabel.snp.bottom).offset(CGFloat.compactMargin)
+            $0.leading.trailing.equalToSuperview().inset(CGFloat.baseMargin)
         }
     }
     
