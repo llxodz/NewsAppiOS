@@ -29,9 +29,9 @@ class DetailViewModel {
     
     func getAuthorNews() -> String {
         if ((news?.author) != nil) {
-            return "Автор: \(news?.author ?? "")"
+            return "\(L10n.Detail.author): \(news?.author ?? "")"
         } else {
-            return "Автор не указан"
+            return L10n.Detail.notAuthor
         }
     }
     

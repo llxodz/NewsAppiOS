@@ -66,6 +66,7 @@ final class MainViewController: BaseViewController {
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0.001, height: 0))
         tableView.separatorInset = UIEdgeInsets(top: 0, left: .baseMargin, bottom: 0, right: 0)
         tableView.delegate = self
+        tableView.backgroundColor = .clear
         tableView.dataSource = self
         tableView.delaysContentTouches = false
         tableView.register(NewsTableViewCell.self, forCellReuseIdentifier: NewsTableViewCell.identifier)

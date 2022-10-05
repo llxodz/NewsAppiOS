@@ -8,3 +8,6 @@
 
 BreakingNews = "Важные новости";
 Detail.ShareButton = "Поделиться";
+Detail.Author = "Автор";
+Detail.NotAuthor = "Автор не указан";
+Network.Country = "ru";

@@ -8,3 +8,6 @@
 
 BreakingNews = "Breaking News";
 Detail.ShareButton = "Share";
+Detail.Author = "Author";
+Detail.NotAuthor = "The author is not specified";
+Network.Country = "us";

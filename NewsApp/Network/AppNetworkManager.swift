@@ -14,7 +14,7 @@ private enum Constants {
         guard let apiKey = Bundle.main.infoDictionary?["apiKey"] as? String else { return "0x0003" }
         return apiKey
     }()
-    static let country = "ru"
+    static let country = L10n.Network.country
 }
 
 final class AppNetworkManager {
