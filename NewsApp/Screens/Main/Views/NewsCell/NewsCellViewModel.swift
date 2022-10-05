@@ -9,7 +9,7 @@ import UIKit
 
 class NewsCellViewModel {
     
-    private var news: ArticleEntity?
+    var news: ArticleEntity?
     
     init(news: ArticleEntity?) {
         self.news = news

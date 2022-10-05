@@ -18,7 +18,7 @@ final class HeaderMainView: UIView {
     // UI
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = L10n.breakingsNews
+        label.text = L10n.breakingNews
         label.font = Constants.titleFont
         label.textColor = Asset.mainBackgroundColor.color
         return label
@@ -28,6 +28,8 @@ final class HeaderMainView: UIView {
         view.backgroundColor = .gray
         return view
     }()
+    
+    // MARK: - Init
     
     override init(frame: CGRect) {
         super.init(frame: frame)

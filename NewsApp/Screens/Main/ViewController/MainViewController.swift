@@ -19,7 +19,8 @@ final class MainViewController: BaseViewController {
     private lazy var headerView = HeaderMainView()
     private lazy var tableView = UITableView()
     
-    private var viewModel: MainViewModel?
+    var viewModel: MainViewModel?
+    var coordinator: AppCoordinator?
     
     // MARK: - Lifecycle
     
@@ -27,7 +28,6 @@ final class MainViewController: BaseViewController {
         super.loadView()
         addSubviews()
         configureLayout()
-        configureAppearance()
         configureTableView()
     }
 
@@ -36,6 +36,11 @@ final class MainViewController: BaseViewController {
         view.backgroundColor = .white
         
         configureViewModel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     // MARK: - Private
@@ -56,14 +61,12 @@ final class MainViewController: BaseViewController {
         }
     }
     
-    private func configureAppearance() {
+    private func configureTableView() {
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0.001, height: 0))
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0.001, height: 0))
         tableView.separatorInset = UIEdgeInsets(top: 0, left: .baseMargin, bottom: 0, right: 0)
-    }
-    
-    private func configureTableView() {
         tableView.delegate = self
+        tableView.backgroundColor = .clear
         tableView.dataSource = self
         tableView.delaysContentTouches = false
         tableView.register(NewsTableViewCell.self, forCellReuseIdentifier: NewsTableViewCell.identifier)
@@ -71,7 +74,6 @@ final class MainViewController: BaseViewController {
     }
     
     private func configureViewModel() {
-        viewModel = MainViewModel()
         viewModel?.fetchNews {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -101,5 +103,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        coordinator?.showDetailViewController(viewModel?.selectedRow(forIndexPath: indexPath))
     }
 }

@@ -11,7 +11,19 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
   /// Breaking News
-  internal static let breakingsNews = L10n.tr("Localizable", "BreakingsNews", fallback: "Breaking News")
+  internal static let breakingNews = L10n.tr("Localizable", "BreakingNews", fallback: "Breaking News")
+  internal enum Detail {
+    /// Author
+    internal static let author = L10n.tr("Localizable", "Detail.Author", fallback: "Author")
+    /// The author is not specified
+    internal static let notAuthor = L10n.tr("Localizable", "Detail.NotAuthor", fallback: "The author is not specified")
+    /// Share
+    internal static let shareButton = L10n.tr("Localizable", "Detail.ShareButton", fallback: "Share")
+  }
+  internal enum Network {
+    /// us
+    internal static let country = L10n.tr("Localizable", "Network.Country", fallback: "us")
+  }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

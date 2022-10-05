@@ -14,6 +14,7 @@ private enum Constants {
         guard let apiKey = Bundle.main.infoDictionary?["apiKey"] as? String else { return "0x0003" }
         return apiKey
     }()
+    static let country = L10n.Network.country
 }
 
 final class AppNetworkManager {
@@ -31,7 +32,7 @@ final class AppNetworkManager {
         guard let url = URL(string: getBaseUrl(baseUrl: Constants.baseURL,
                                                method: Constants.method,
                                                apiKey: Constants.apiKey,
-                                               country: "ru"))
+                                               country: Constants.country))
         else { return }
         
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
@@ -47,18 +48,6 @@ final class AppNetworkManager {
                     comlition(.failure(error))
                 }
             }
-        }
-        
-        task.resume()
-    }
-    
-    /// Get image in news
-    public func getImageFromNews(url: String?, complition: @escaping (_ image: UIImage?) -> Void) {
-        guard let url = URL(string: url ?? "") else { return }
-        
-        let task = URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data, error == nil else { return }
-            complition(UIImage(data: data))
         }
         
         task.resume()

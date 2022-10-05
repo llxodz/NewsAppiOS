@@ -9,6 +9,7 @@ target 'NewsApp' do
   pod 'SwiftGen'
   pod 'SnapKit'
   pod 'Toast-Swift'
+  pod 'Kingfisher', '~> 7.0'
 
   target 'NewsAppTests' do
     inherit! :search_paths

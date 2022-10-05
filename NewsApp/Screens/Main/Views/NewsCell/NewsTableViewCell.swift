@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 private enum Constants {
     static let titleLabelFont: UIFont = FontFamily.Montserrat.bold.font(size: 16)
@@ -25,14 +26,11 @@ final class NewsTableViewCell: UITableViewCell {
     
     weak var viewModel: NewsCellViewModel? {
         didSet {
-            titleLabel.text = viewModel?.getTitle()
-            descriptionLabel.text = viewModel?.getDescription()
-            AppNetworkManager.shared.getImageFromNews(url: viewModel?.getImageURL()) { image in
-                DispatchQueue.main.async {
-                    guard let image = image else { return }
-                    self.newsImageView.image = image
-                }
-            }
+            guard let viewModel = viewModel else { return }
+            titleLabel.text = viewModel.getTitle()
+            descriptionLabel.text = viewModel.getDescription()
+            let url = URL(string: viewModel.getImageURL())
+            newsImageView.kf.setImage(with: url)
         }
     }
     
@@ -58,10 +56,11 @@ final class NewsTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    // MARK: - Lifecycle
+    // MARK: - Init
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = .clear
         addViews()
         configureLayout()
     }
