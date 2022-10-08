@@ -76,7 +76,7 @@ final class MainViewController: BaseViewController {
     private func configureViewModel() {
         viewModel?.fetchNews { [weak self] in
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self?.tableView.reloadData()
             }
         }
     }
